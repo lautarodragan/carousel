@@ -47,6 +47,8 @@
       }
     </style>
     <script>
+      const mod = (a, n) => ((a%n)+n)%n
+
       const starters = [
         {
           id: '1',
@@ -74,17 +76,18 @@
         const wrapperDiv = document.querySelector('.carousel .wrapper')
 
         const setSelected = (index) => {
-          console.log(`Selecting pokemon with index ${index}`)
-          carouselUl.style.transform = `translateX(-${100 * index}%)`
-          selectedIndex = index
+          const wrappedIndex = mod(index, starters.length)
+          console.log(`Selecting pokemon with index ${wrappedIndex}`)
+          carouselUl.style.transform = `translateX(-${100 * wrappedIndex}%)`
+          selectedIndex = wrappedIndex
         }
 
         btnNext.addEventListener('click', () => {
-          setSelected(selectedIndex < starters.length - 1 ? selectedIndex + 1 : 0)
+          setSelected(selectedIndex + 1)
         })
 
         btnPrevious.addEventListener('click', () => {
-          setSelected(selectedIndex > 0 ? selectedIndex - 1 : starters.length - 1)
+          setSelected(selectedIndex - 1)
         })
 
         starters.forEach(starter => {
