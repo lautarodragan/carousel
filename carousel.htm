@@ -55,6 +55,16 @@
         margin: 0 10px;
       }
 
+      .list-wrapper {
+        background-image: url(./parallax.jpg);
+        background-size: cover;
+        background-repeat: repeat-x;
+        background-position-x: 0px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        transition: background-position-x 1s;
+      }
+
     </style>
     <script>
       const mod = (a, n) => ((a%n)+n)%n
@@ -83,11 +93,13 @@
         const carousel = document.querySelector('.carousel')
         const carouselUl = carousel.querySelector('ul')
         const nav = carousel.querySelector('nav')
+        const listWrapper = carousel.querySelector('.list-wrapper')
 
         const setSelected = (index) => {
           const wrappedIndex = mod(index, starters.length)
           console.log(`Selecting pokemon with index ${wrappedIndex}`)
           carouselUl.style.transform = `translateX(-${100 * wrappedIndex}%)`
+          listWrapper.style.backgroundPositionX = `${-300 * wrappedIndex}px`
           selectedIndex = wrappedIndex
         }
 
