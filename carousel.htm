@@ -70,10 +70,9 @@
       let selectedIndex
 
       document.addEventListener('DOMContentLoaded', () => {
-        const btnPrevious = document.getElementById('previous')
-        const btnNext = document.getElementById('next')
-        const carouselUl = document.querySelector('.carousel ul')
-        const wrapperDiv = document.querySelector('.carousel .wrapper')
+        const carousel = document.querySelector('.carousel')
+        const carouselUl = carousel.querySelector('ul')
+        const nav = carousel.querySelector('nav')
 
         const setSelected = (index) => {
           const wrappedIndex = mod(index, starters.length)
@@ -82,12 +81,9 @@
           selectedIndex = wrappedIndex
         }
 
-        btnNext.addEventListener('click', () => {
-          setSelected(selectedIndex + 1)
-        })
-
-        btnPrevious.addEventListener('click', () => {
-          setSelected(selectedIndex - 1)
+        nav.addEventListener('click', event => {
+          if (event.target.tagName === 'BUTTON')
+            setSelected(selectedIndex + parseInt(event.target.dataset.value))
         })
 
         starters.forEach(starter => {
@@ -108,8 +104,8 @@
         </ul>
       </div>
       <nav>
-        <button id="previous">Previous</button>
-        <button id="next">Next</button>
+        <button data-value="-1">Previous</button>
+        <button data-value="1">Next</button>
       </nav>
     </section>
   </body>
