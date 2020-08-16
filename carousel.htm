@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>Amazon Practice — Carousel</title>
+    <meta charset="utf-8">
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+      }
+
+      section.carousel{
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        padding: 8px;
+      }
+      section.carousel .list-wrapper {
+        overflow: hidden;
+      }
+      section.carousel ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        transition: transform 1s;
+      }
+      section.carousel ul >li {
+        flex: 1 0 auto;
+        width: -moz-available;
+        height: 300px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 8px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        margin: 8px;
+        background-position: center;
+        background-origin: content-box;
+        color: white;
+        -webkit-text-stroke: 1.5px black;
+        font-size: 2em;
+        font-family: Ubuntu;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      const starters = [
+        {
+          id: '1',
+          name: 'Bulbasaur',
+          url: './bulbasaur.png',
+        },
+        {
+          id: '2',
+          name: 'Charmander',
+          url: './charmander.png',
+        },
+        {
+          id: '3',
+          name: 'Squirtle',
+          url: './squirtle.png',
+        },
+      ]
+
+      let selectedIndex
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const btnPrevious = document.getElementById('previous')
+        const btnNext = document.getElementById('next')
+        const carouselUl = document.querySelector('.carousel ul')
+        const wrapperDiv = document.querySelector('.carousel .wrapper')
+
+        const setSelected = (index) => {
+          console.log(`Selecting pokemon with index ${index}`)
+          // if (selected)
+            // carouselUl.querySelector(`[data-id="${selected}"]`).classList.remove('active')
+          // selected = id
+          // const selectedIndex = starters.findIndex(_ => _.id === selected)
+          // carouselUl.querySelector(`[data-id="${id}"]`).classList.add('active')
+          carouselUl.style.transform = `translateX(-${100 * index}%)`
+          selectedIndex = index
+        }
+
+        btnNext.addEventListener('click', () => {
+          // const selectedIndex = starters.findIndex(_ => _.id === selected)
+          // const nextIndex = selectedIndex < starters.length - 1 ? selectedIndex + 1 : 0
+          // console.log('Selecting index', nextIndex)
+          setSelected(selectedIndex < starters.length - 1 ? selectedIndex + 1 : 0)
+        })
+
+        btnPrevious.addEventListener('click', () => {
+          // const selectedIndex = starters.findIndex(_ => _.id === selected)
+          // const nextIndex = selectedIndex > 0 ? selectedIndex - 1 : starters.length - 1
+          // console.log('Selecting index', nextIndex)
+          setSelected(selectedIndex > 0 ? selectedIndex - 1 : starters.length - 1)
+        })
+
+        starters.forEach(starter => {
+          const li = document.createElement('li')
+          li.appendChild(document.createTextNode(starter.name))
+          li.style.backgroundImage = `url(${starter.url})`
+          carouselUl.appendChild(li)
+        })
+
+        setSelected(0)
+      })
+    </script>
+  </head>
+  <body>
+    <section class="carousel">
+      <div class="list-wrapper">
+        <ul>
+        </ul>
+      </div>
+      <nav>
+        <button id="previous">Previous</button>
+        <button id="next">Next</button>
+      </nav>
+    </section>
+  </body>
+</html>
