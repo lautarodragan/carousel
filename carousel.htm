@@ -75,26 +75,15 @@
 
         const setSelected = (index) => {
           console.log(`Selecting pokemon with index ${index}`)
-          // if (selected)
-            // carouselUl.querySelector(`[data-id="${selected}"]`).classList.remove('active')
-          // selected = id
-          // const selectedIndex = starters.findIndex(_ => _.id === selected)
-          // carouselUl.querySelector(`[data-id="${id}"]`).classList.add('active')
           carouselUl.style.transform = `translateX(-${100 * index}%)`
           selectedIndex = index
         }
 
         btnNext.addEventListener('click', () => {
-          // const selectedIndex = starters.findIndex(_ => _.id === selected)
-          // const nextIndex = selectedIndex < starters.length - 1 ? selectedIndex + 1 : 0
-          // console.log('Selecting index', nextIndex)
           setSelected(selectedIndex < starters.length - 1 ? selectedIndex + 1 : 0)
         })
 
         btnPrevious.addEventListener('click', () => {
-          // const selectedIndex = starters.findIndex(_ => _.id === selected)
-          // const nextIndex = selectedIndex > 0 ? selectedIndex - 1 : starters.length - 1
-          // console.log('Selecting index', nextIndex)
           setSelected(selectedIndex > 0 ? selectedIndex - 1 : starters.length - 1)
         })
 
